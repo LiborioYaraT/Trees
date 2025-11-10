@@ -69,12 +69,20 @@ struct Node* search(struct Node* root, int key) {
    b) Preorder: raíz, izquierda, derecha
    c) Postorder: izquierda, derecha, raíz (útil para liberar memoria)
 */
+void addNum();
 
 void inorder(struct Node* root) {
     if (root == NULL) return;
     inorder(root->left);
     printf("%d ", root->key);
     inorder(root->right);
+}
+
+void inorder2(struct Node* root) {
+    if (root == NULL) return;
+    inorder2(root->right);
+    printf("%d ", root->key);
+    inorder2(root->left);
 }
 
 void preorder(struct Node* root) {
@@ -116,15 +124,19 @@ int main(void) {
     //     /  \  /  \
     //   20  40 60  80
 
-    int keys[] = {50, 30, 70, 20, 40, 60, 80};
+    int keys[] = {50, 30, 70, 20, 40, 60, 80,10,90,100};
     size_t n = sizeof(keys) / sizeof(keys[0]);
     for (size_t i = 0; i < n; ++i) {
         root = insert(root, keys[i]);
     }
 
     // Mostrar recorridos
-    printf("Inorder (orden ascendente): ");
+    printf("Inorder (orden acendente): ");
     inorder(root);
+    printf("\n");
+    
+    printf("Inorder (orden decendente)");
+    inorder2(root);
     printf("\n");
 
     printf("Preorder: ");
